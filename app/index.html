@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 🔒 Proteção de rota -->
+  <script>
+    if (localStorage.getItem("logged") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="container">
+    <h1 id="home-title">Bem-vindo</h1>
+    <p id="home-text">Aplicação de teste para Selenium</p>
+
+    <button id="logout-button" onclick="logout()">Sair</button>
+  </div>
+
+  <!-- Script com funções -->
+  <script src="script.js"></script>
+
+</body>
+</html>
