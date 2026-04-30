@@ -7,7 +7,6 @@
 </head>
 <body>
 
-  <!-- 🔒 Proteção de rota -->
   <script>
     if (localStorage.getItem("logged") !== "true") {
       window.location.href = "login.html";
@@ -18,7 +17,7 @@
     <h1 id="home-title">Bem-vindo</h1>
     <p id="home-text">Aplicação de teste para Selenium</p>
 
-    <button id="logout-button" onclick="logout()">Sair</button>
+    <button id="logout-button" onclick="logout()">Logout</button>
   </div>
 
   <!-- Script com funções -->

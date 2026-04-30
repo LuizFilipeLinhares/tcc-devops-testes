@@ -1,0 +1,9 @@
+
+def test_login_campos_vazios(driver):
+    driver.get("http://localhost:8000/login.html")
+
+    driver.find_element("id", "login-button").click()
+
+    error_message = driver.find_element("id", "error-message").text
+
+    assert "Preencha todos os campos" in error_message

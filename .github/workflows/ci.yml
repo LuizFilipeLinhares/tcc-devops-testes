@@ -1,0 +1,22 @@
+
+name: CI - Testes Automatizados com DevOps
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Build da imagem Docker
+        run: docker build -t tcc-devops-testes .
+
+      - name: Executar testes automatizados no container
+        run: docker run --rm tcc-devops-testes
