@@ -6,7 +6,7 @@ function login() {
   const errorMessage = document.getElementById("error-message");
 
   const validEmail = "admin@test.com";
-  const validPassword = "123456";
+  const validPassword = "654321"; // BUG: senha incorreta
 
   if (!email || !password) {
     errorMessage.innerText = "Preencha todos os campos";
