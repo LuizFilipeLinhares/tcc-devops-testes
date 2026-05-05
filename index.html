@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>TaskFlow — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <script>
+    if (localStorage.getItem("logged") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <nav class="navbar">
+    <span class="brand-name">TaskFlow</span>
+    <div class="user-info">
+      <span id="user-email">admin@test.com</span>
+      <button id="logout-button" class="btn-logout" onclick="logout()">Sair</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="card">
+      <h2>Nova Tarefa</h2>
+      <div class="add-task-form">
+        <input type="text" id="task-input" placeholder="Descreva a tarefa...">
+        <button id="add-task-button" class="btn-add" onclick="addTask()">Adicionar</button>
+      </div>
+      <p id="task-error" class="error"></p>
+    </div>
+
+    <div class="card">
+      <h2>Minhas Tarefas</h2>
+      <ul id="task-list" class="task-list"></ul>
+      <p id="empty-state" class="empty-state">Nenhuma tarefa cadastrada ainda.</p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
