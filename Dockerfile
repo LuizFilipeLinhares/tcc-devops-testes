@@ -25,7 +25,6 @@ ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 
 EXPOSE 8000
 
-# Comando padrão: 
-# 1. Sobe o servidor da aplicação
-# 2. Executa os testes automatizados
-CMD python -m http.server 8000 & pytest -v
+# Comando padrão:
+# 1. Executa os testes automatizados e gera relatório HTML
+CMD pytest -v --html=report.html --self-contained-html

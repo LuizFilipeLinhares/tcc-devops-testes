@@ -18,4 +18,13 @@ jobs:
         run: docker build -t tcc-devops-testes .
 
       - name: Executar testes automatizados no container
-        run: docker run --rm tcc-devops-testes pytest -q
+        run: |
+          docker run --name tcc-tests tcc-devops-testes
+          docker cp tcc-tests:/app/report.html ./report.html
+
+      - name: Upload do relatório de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-testes
+          path: report.html

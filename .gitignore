@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+
+# Relatório gerado localmente (o CI gera o próprio)
+report.html
+
+# VS Code
+.vscode/

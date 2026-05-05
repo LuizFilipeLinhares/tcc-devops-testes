@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-def test_login_com_falha(driver):
-    driver.get("http://127.0.0.1:8000/login.html")
+def test_login_com_falha(driver, http_server):
     driver.get(f"{http_server}/login.html")
 
     driver.find_element(By.ID, "email").send_keys("erro@test.com")

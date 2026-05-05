@@ -3,8 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-def test_login_com_sucesso(driver):
-    driver.get("http://127.0.0.1:8000/login.html")
+def test_login_com_sucesso(driver, http_server):
     driver.get(f"{http_server}/login.html")
 
     driver.find_element(By.ID, "email").send_keys("admin@test.com")
