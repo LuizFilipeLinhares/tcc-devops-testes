@@ -111,7 +111,7 @@ As seguintes métricas são coletadas e comparadas entre os dois cenários:
 | Nome | Contato |
 |---|---|
 | Luiz Filipe Romualdo Linhares | linharesluizfilipe@gmail.com |
-| Mateus Zanin Fernandes | — |
+| Mateus Zanin Fernandes | mateusz123fernandes@gmail.com |
 
 **Orientador:** Prof. Deiezon Lemes — dieizon.lemes@satc.edu.br
 
