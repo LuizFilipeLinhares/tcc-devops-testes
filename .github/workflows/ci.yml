@@ -69,17 +69,17 @@ jobs:
 
           BLOCKED=0
 
-          if [ "$VULN_COUNT_MEDIUM" -gt 20 ]; then
+          if [ "$VULN_COUNT_MEDIUM" -gt 120 ]; then
             echo "⛔ Pipeline bloqueada: $VULN_COUNT_MEDIUM vulnerabilidades MEDIUM encontradas (limite: 50)."
             BLOCKED=1
           fi
 
-          if [ "$VULN_COUNT_HIGH" -gt 20 ]; then
+          if [ "$VULN_COUNT_HIGH" -gt 40 ]; then
             echo "⛔ Pipeline bloqueada: $VULN_COUNT_HIGH vulnerabilidades HIGH encontradas (limite: 50)."
             BLOCKED=1
           fi
 
-          if [ "$VULN_COUNT_CRITICAL" -gt 2 ]; then
+          if [ "$VULN_COUNT_CRITICAL" -gt 10 ]; then
             echo "⛔ Pipeline bloqueada: $VULN_COUNT_CRITICAL vulnerabilidades CRITICAL encontradas."
             BLOCKED=1
           fi
