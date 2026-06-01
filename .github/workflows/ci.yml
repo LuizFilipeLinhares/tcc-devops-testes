@@ -31,6 +31,65 @@ jobs:
           name: relatorio-testes
           path: report.html
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'image'
+          image-ref: 'tcc-devops-testes'
+          format: 'json'
+          output: 'trivy-results.json'
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Upload do relatório Trivy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy-results.json
+
+      - name: Analisar resultados do Trivy
+        if: always()
+        run: |
+          if [ ! -f trivy-results.json ]; then
+            echo "Arquivo trivy-results.json não encontrado. Pulando análise."
+            exit 0
+          fi
+
+          VULN_COUNT_MEDIUM=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity == "MEDIUM")] | length' trivy-results.json)
+          VULN_COUNT_HIGH=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity == "HIGH")] | length' trivy-results.json)
+          VULN_COUNT_CRITICAL=$(jq '[.Results[]?.Vulnerabilities[]? | select(.Severity == "CRITICAL")] | length' trivy-results.json)
+
+          echo "=============================="
+          echo "  Relatório de Vulnerabilidades"
+          echo "=============================="
+          echo "  MEDIUM:   $VULN_COUNT_MEDIUM"
+          echo "  HIGH:     $VULN_COUNT_HIGH"
+          echo "  CRITICAL: $VULN_COUNT_CRITICAL"
+          echo "=============================="
+
+          BLOCKED=0
+
+          if [ "$VULN_COUNT_MEDIUM" -gt 20 ]; then
+            echo "⛔ Pipeline bloqueada: $VULN_COUNT_MEDIUM vulnerabilidades MEDIUM encontradas (limite: 50)."
+            BLOCKED=1
+          fi
+
+          if [ "$VULN_COUNT_HIGH" -gt 20 ]; then
+            echo "⛔ Pipeline bloqueada: $VULN_COUNT_HIGH vulnerabilidades HIGH encontradas (limite: 50)."
+            BLOCKED=1
+          fi
+
+          if [ "$VULN_COUNT_CRITICAL" -gt 2 ]; then
+            echo "⛔ Pipeline bloqueada: $VULN_COUNT_CRITICAL vulnerabilidades CRITICAL encontradas."
+            BLOCKED=1
+          fi
+
+          if [ "$BLOCKED" -eq 1 ]; then
+            exit 1
+          fi
+
+          echo "✅ Scan concluído dentro dos limites aceitáveis."
+
       - name: Análise do SonarCloud
         uses: SonarSource/sonarcloud-github-action@master
         env:
